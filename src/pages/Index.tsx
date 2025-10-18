@@ -94,10 +94,10 @@ const Index = () => {
   ];
 
   const competencies = [
-    { icon: "TrendingUp", title: "Маркетинговая аналитика", description: "Big Data, BI, Data Analysis" },
     { icon: "Target", title: "Стратегии", description: "Разработка и реализация маркетинговых стратегий и планов" },
     { icon: "Workflow", title: "Управление маркетингом", description: "От планирования до реализации" },
     { icon: "UserPlus", title: "Лидогенерация", description: "Привлечение клиентов" },
+    { icon: "TrendingUp", title: "Маркетинговая аналитика", description: "Программный анализ данных, web аналитика, Big Data, BI, Data Analysis" },
     { icon: "Search", title: "SEO / Digital", description: "Системное продвижение компании, товаров и услуг в интернете" },
     { icon: "Users", title: "Управление", description: "Найм и развитие команд" },
     { icon: "Zap", title: "Автоматизация", description: "Внедрение CRM систем, ИИ-инструменты, процессы" },
