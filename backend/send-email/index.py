@@ -1,14 +1,12 @@
 import json
-import smtplib
 import os
-from email.mime.text import MIMEText
-from email.mime.multipart import MIMEMultipart
 from typing import Dict, Any
+from urllib import request, parse
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     '''
-    Business: Send contact form emails to yuriy.naumov@gmail.com
-    Args: event with httpMethod, body containing name, email, message
+    Business: Send contact form messages to Telegram
+    Args: event with httpMethod, body containing name, phone, message
           context with request_id
     Returns: HTTP response with success/error status
     '''
@@ -38,10 +36,10 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     body_data = json.loads(event.get('body', '{}'))
     name = body_data.get('name', '')
-    email = body_data.get('email', '')
+    phone = body_data.get('phone', '')
     message = body_data.get('message', '')
     
-    if not name or not email or not message:
+    if not name or not phone or not message:
         return {
             'statusCode': 400,
             'headers': {
@@ -51,67 +49,63 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': json.dumps({'error': 'All fields are required'})
         }
     
-    smtp_host = os.environ.get('SMTP_HOST', 'smtp.gmail.com')
-    smtp_port = int(os.environ.get('SMTP_PORT', '587'))
-    smtp_user = os.environ.get('SMTP_USER', '')
-    smtp_password = os.environ.get('SMTP_PASSWORD', '')
+    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
     
-    if not smtp_user or not smtp_password:
+    if not bot_token or not chat_id:
         return {
             'statusCode': 500,
             'headers': {
                 'Content-Type': 'application/json',
                 'Access-Control-Allow-Origin': '*'
             },
-            'body': json.dumps({'error': 'SMTP credentials not configured'})
+            'body': json.dumps({'error': 'Telegram credentials not configured'})
         }
     
-    recipient = 'yuriy.naumov@gmail.com'
+    telegram_message = f"""🔔 <b>Новая заявка с сайта-резюме</b>
+
+👤 <b>Имя:</b> {name}
+📞 <b>Телефон:</b> {phone}
+
+💬 <b>Сообщение:</b>
+{message}
+"""
     
-    msg = MIMEMultipart('alternative')
-    msg['Subject'] = f'Новый запрос с портфолио от {name}'
-    msg['From'] = smtp_user
-    msg['To'] = recipient
-    msg['Reply-To'] = email
+    url = f'https://api.telegram.org/bot{bot_token}/sendMessage'
+    data = {
+        'chat_id': chat_id,
+        'text': telegram_message,
+        'parse_mode': 'HTML'
+    }
     
-    message_html = message.replace('\n', '<br>')
+    req = request.Request(
+        url,
+        data=json.dumps(data).encode('utf-8'),
+        headers={'Content-Type': 'application/json'}
+    )
     
-    html_content = f"""
-    <html>
-      <body style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
-        <h2 style="color: #0EA5E9;">Новое сообщение с сайта-портфолио</h2>
-        <p><strong>Имя:</strong> {name}</p>
-        <p><strong>Email:</strong> <a href="mailto:{email}">{email}</a></p>
-        <p><strong>Сообщение:</strong></p>
-        <div style="background-color: #f4f4f4; padding: 15px; border-radius: 5px;">
-          {message_html}
-        </div>
-        <hr style="margin-top: 30px; border: none; border-top: 1px solid #ddd;">
-        <p style="font-size: 12px; color: #888;">
-          Это письмо отправлено автоматически с вашего сайта-портфолио.
-        </p>
-      </body>
-    </html>
-    """
+    response = request.urlopen(req)
+    response_data = json.loads(response.read().decode('utf-8'))
     
-    html_part = MIMEText(html_content, 'html')
-    msg.attach(html_part)
-    
-    server = smtplib.SMTP(smtp_host, smtp_port)
-    server.starttls()
-    server.login(smtp_user, smtp_password)
-    server.send_message(msg)
-    server.quit()
+    if response_data.get('ok'):
+        return {
+            'statusCode': 200,
+            'headers': {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': '*'
+            },
+            'isBase64Encoded': False,
+            'body': json.dumps({
+                'success': True,
+                'message': 'Message sent to Telegram successfully'
+            })
+        }
     
     return {
-        'statusCode': 200,
+        'statusCode': 500,
         'headers': {
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': '*'
         },
-        'isBase64Encoded': False,
-        'body': json.dumps({
-            'success': True,
-            'message': 'Email sent successfully'
-        })
+        'body': json.dumps({'error': 'Failed to send message to Telegram'})
     }

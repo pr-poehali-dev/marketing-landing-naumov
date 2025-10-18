@@ -22,7 +22,7 @@
       "path": "/",
       "body": {
         "name": "Test",
-        "email": ""
+        "phone": ""
       },
       "expectedStatus": 400,
       "expectedBody": {
