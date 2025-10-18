@@ -104,13 +104,32 @@ const Index = () => {
     { icon: "Globe", title: "Английский C2", description: "Свободно в работе" }
   ];
 
-  const metrics = [
-    { value: "20+", label: "лет опыта" },
-    { value: "4x", label: "рост трафика" },
-    { value: "67%", label: "рост продаж" },
-    { value: "10+ млн", label: "привлечено инвестиций" },
-    { value: "41", label: "публикация" },
-    { value: "$200K+", label: "кредиты по проектам" }
+  const achievements = [
+    { 
+      icon: "TrendingUp", 
+      title: "Увеличил онлайн-трафик в 2,8 раза",
+      description: "Повысил лидогенерацию в крупной компании недвижимости"
+    },
+    { 
+      icon: "Workflow", 
+      title: "Автоматизировал маркетинговые процессы",
+      description: "Внедрил сквозную аналитику для управленческих решений"
+    },
+    { 
+      icon: "Rocket", 
+      title: "Успешно запустил франшизу",
+      description: "Привлёк 10 млн руб. инвестиций, удвоил продажи рекламных услуг"
+    },
+    { 
+      icon: "ShoppingCart", 
+      title: "Внедрил CRM и стратегию продвижения",
+      description: "Для фармкомпании, обеспечив рост новых продуктов"
+    },
+    { 
+      icon: "DollarSign", 
+      title: "Реализовал проекты с многомиллионным бюджетом",
+      description: "Бизнес-планы, получение инвестиций и консалтинг"
+    }
   ];
 
   return (
@@ -231,15 +250,18 @@ const Index = () => {
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Ключевые достижения
           </h2>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-6">
-            {metrics.map((metric, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {achievements.map((achievement, index) => (
               <Card 
                 key={index} 
-                className="p-6 text-center hover:shadow-lg transition-shadow animate-fade-in"
+                className="p-8 hover:shadow-xl transition-all hover:-translate-y-2 animate-fade-in"
                 style={{ animationDelay: `${index * 0.1}s` }}
               >
-                <div className="text-4xl font-bold text-primary mb-2">{metric.value}</div>
-                <div className="text-sm text-muted-foreground">{metric.label}</div>
+                <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center mb-5">
+                  <Icon name={achievement.icon} className="text-primary" size={28} />
+                </div>
+                <h3 className="font-bold text-lg mb-3 text-foreground">{achievement.title}</h3>
+                <p className="text-muted-foreground leading-relaxed">{achievement.description}</p>
               </Card>
             ))}
           </div>
