@@ -44,52 +44,52 @@ const Index = () => {
 
   const experiences = [
     {
-      year: "2023-2024",
-      company: "ООО «ВТ»",
-      role: "Менеджер проектов",
-      achievements: ["Запуск сайта и системы аналитики", "Сотрудничество с партнёрами в ОАЭ", "SEO-оптимизация и подбор персонала"]
-    },
-    {
-      year: "2022-2023",
-      company: "ООО «Жилфонд»",
+      year: "октябрь 2025 — н.в.",
+      company: "Торговая компания",
       role: "Руководитель отдела маркетинга",
-      achievements: ["Рост трафика в 2,8 раза", "Внедрение CRM-модулей", "Запуск сквозной аналитики", "Франшизы B2B"]
+      description: "Продажа промышленного оборудования"
     },
     {
-      year: "2020-2022",
-      company: "ГК «Ярко»",
-      role: "Маркетолог",
-      achievements: ["Рост продаж свыше 2 раз", "Привлечение инвестиций", "Запуск франшиз"]
+      year: "2019-2025",
+      company: "Федеральное агентство недвижимости",
+      role: "Руководитель отделов маркетинга и цифрового маркетинга",
+      description: ""
     },
     {
-      year: "2018-2020",
-      company: "Стоматология «Дантист Сибири»",
-      role: "Маркетолог",
-      achievements: ["Рост базы пациентов", "Увеличение посещаемости", "Разработка сайта"]
+      year: "2018",
+      company: "Рекламное агентство",
+      role: "Руководитель отдела маркетинга",
+      description: ""
     },
     {
-      year: "2016-2018",
-      company: "Sky Lift / Строительная компания",
-      role: "Маркетолог",
-      achievements: ["Позиционирование проекта", "Оптимизация рекламы"]
+      year: "2014-2017",
+      company: "Производственное предприятие",
+      role: "Руководитель отдела стратегического маркетинга",
+      description: ""
     },
     {
-      year: "2014-2016",
-      company: "Neomed Prod",
-      role: "Руководитель стратегического маркетинга",
-      achievements: ["CRM с нуля", "Продвижение 5 препаратов"]
+      year: "2009-2013",
+      company: "Консалтинговая компания",
+      role: "Заместитель директора",
+      description: ""
     },
     {
-      year: "2012-2014",
-      company: "УзCarlsberg",
-      role: "Менеджер по маркетингу",
-      achievements: ["Запуск бренда «Хлебный край»", "Программы мотивации"]
+      year: "2007-2009",
+      company: "Телекоммуникационная компания",
+      role: "Руководитель отдела маркетинга",
+      description: ""
     },
     {
-      year: "2004-2012",
-      company: "Avesta / Центр содействия эконом. развитию",
-      role: "Аналитик / Консультант",
-      achievements: ["ТЭО и бизнес-планы", "Исследования рынка", "Тренинги"]
+      year: "2005-2007",
+      company: "Исследовательская организация",
+      role: "Руководитель отдела",
+      description: ""
+    },
+    {
+      year: "2002-2004",
+      company: "Научно-исследовательский центр по вопросам экономики",
+      role: "Научный сотрудник",
+      description: ""
     }
   ];
 
@@ -307,21 +307,16 @@ const Index = () => {
                 >
                   <div className="hidden md:block absolute left-6 top-6 w-5 h-5 bg-primary rounded-full border-4 border-white shadow"></div>
                   <Card className="p-6 hover:shadow-lg transition-shadow">
-                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
+                    <div className="flex flex-col md:flex-row md:items-center justify-between mb-3">
                       <div>
                         <h3 className="text-xl font-bold text-foreground">{exp.company}</h3>
                         <p className="text-lg text-muted-foreground">{exp.role}</p>
                       </div>
                       <div className="text-sm font-semibold text-primary mt-2 md:mt-0">{exp.year}</div>
                     </div>
-                    <ul className="space-y-2">
-                      {exp.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-2 text-sm text-foreground/80">
-                          <Icon name="CheckCircle2" className="text-primary mt-0.5 flex-shrink-0" size={16} />
-                          <span>{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
+                    {exp.description && (
+                      <p className="text-sm text-foreground/70 mt-2">{exp.description}</p>
+                    )}
                   </Card>
                 </div>
               ))}
