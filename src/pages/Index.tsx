@@ -11,10 +11,35 @@ const Index = () => {
     email: "",
     message: ""
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted:", formData);
+    setIsSubmitting(true);
+    setSubmitStatus('idle');
+
+    try {
+      const response = await fetch('https://functions.poehali.dev/774b2c6c-2680-4f32-b4dd-739deea8c634', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      if (response.ok) {
+        setSubmitStatus('success');
+        setFormData({ name: "", email: "", message: "" });
+      } else {
+        setSubmitStatus('error');
+      }
+    } catch (error) {
+      console.error('Error sending email:', error);
+      setSubmitStatus('error');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const experiences = [
@@ -113,7 +138,14 @@ const Index = () => {
               </p>
 
               <div className="flex flex-wrap gap-4">
-                <Button size="lg" className="text-lg px-8">
+                <Button 
+                  size="lg" 
+                  className="text-lg px-8"
+                  onClick={() => {
+                    const contactSection = document.getElementById('contact');
+                    contactSection?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
                   <Icon name="Mail" className="mr-2" size={20} />
                   Связаться
                 </Button>
@@ -230,7 +262,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section id="contact" className="py-20 bg-white">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in">
             Готов обсудить сотрудничество
@@ -271,15 +303,25 @@ const Index = () => {
                 />
               </div>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button type="submit" size="lg" className="flex-1">
+                <Button type="submit" size="lg" className="flex-1" disabled={isSubmitting}>
                   <Icon name="Send" className="mr-2" size={18} />
-                  Отправить запрос
+                  {isSubmitting ? 'Отправка...' : 'Отправить запрос'}
                 </Button>
                 <Button type="button" size="lg" variant="outline" className="flex-1">
                   <Icon name="Mail" className="mr-2" size={18} />
                   yuriy.naumov@gmail.com
                 </Button>
               </div>
+              {submitStatus === 'success' && (
+                <div className="p-4 bg-green-50 border border-green-200 rounded-lg text-green-800">
+                  ✅ Сообщение успешно отправлено! Юрий свяжется с вами в ближайшее время.
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="p-4 bg-red-50 border border-red-200 rounded-lg text-red-800">
+                  ❌ Ошибка отправки. Пожалуйста, напишите напрямую на yuriy.naumov@gmail.com
+                </div>
+              )}
             </form>
           </Card>
         </div>
