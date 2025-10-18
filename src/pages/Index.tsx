@@ -170,7 +170,7 @@ const Index = () => {
             <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
               <div className="relative rounded-2xl overflow-hidden shadow-2xl">
                 <img 
-                  src="https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/1e3fa821-9ba4-4558-bc48-9f52e57e9210.jpg" 
+                  src="https://cdn.poehali.dev/files/09a3cb1b-590e-47da-8b69-d71471605ae1.jpg" 
                   alt="Наумов Юрий Валентинович" 
                   className="w-full h-auto"
                 />
