@@ -49,8 +49,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             'body': json.dumps({'error': 'All fields are required'})
         }
     
-    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN', '')
-    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '')
+    bot_token = os.environ.get('TELEGRAM_BOT_TOKEN', '8032505458:AAGcbc1kC4r5vQwEeschFuyF54bOJpqLJ4c')
+    chat_id = os.environ.get('TELEGRAM_CHAT_ID', '170719594')
     
     if not bot_token or not chat_id:
         return {
