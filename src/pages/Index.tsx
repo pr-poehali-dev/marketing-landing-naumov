@@ -8,7 +8,7 @@ import { useState } from "react";
 const Index = () => {
   const [formData, setFormData] = useState({
     name: "",
-    email: "",
+    phone: "",
     message: ""
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -30,7 +30,7 @@ const Index = () => {
 
       if (response.ok) {
         setSubmitStatus('success');
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", phone: "", message: "" });
       } else {
         setSubmitStatus('error');
       }
@@ -346,12 +346,12 @@ const Index = () => {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-2">Email</label>
+                <label className="block text-sm font-medium mb-2">Телефон</label>
                 <Input 
-                  type="email"
-                  placeholder="your@email.com"
-                  value={formData.email}
-                  onChange={(e) => setFormData({...formData, email: e.target.value})}
+                  type="tel"
+                  placeholder="+7 900 123 45 67"
+                  value={formData.phone}
+                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
                   required
                 />
               </div>
@@ -421,7 +421,7 @@ const Index = () => {
               <h4 className="font-semibold mb-4">Образование</h4>
               <p className="text-sm text-white/70">
                 2 высших образования:<br />
-                ТГУ СУР • ТИИМ (менеджмент, прикладная информатика)
+                ТУСУР • ТИИМ (менеджмент, прикладная информатика)
               </p>
             </div>
           </div>
