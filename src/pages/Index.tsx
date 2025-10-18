@@ -115,7 +115,53 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-white">
-      <section className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-muted px-4 py-20">
+      <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-border z-50">
+        <div className="container mx-auto max-w-6xl px-4">
+          <div className="flex items-center justify-between h-16">
+            <div className="font-bold text-xl text-foreground">Юрий Наумов</div>
+            <nav className="hidden md:flex items-center gap-8">
+              <button 
+                onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Главная
+              </button>
+              <button 
+                onClick={() => document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Достижения
+              </button>
+              <button 
+                onClick={() => document.getElementById('competencies')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Компетенции
+              </button>
+              <button 
+                onClick={() => document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Опыт
+              </button>
+              <button 
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Контакты
+              </button>
+            </nav>
+            <Button 
+              size="sm"
+              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+            >
+              Связаться
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <section id="hero" className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-white to-muted px-4 py-20 pt-32">
         <div className="container mx-auto max-w-6xl">
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
@@ -180,7 +226,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/30">
+      <section id="achievements" className="py-20 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Ключевые достижения
@@ -200,7 +246,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section id="competencies" className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Ключевые компетенции
@@ -223,7 +269,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-muted/30">
+      <section id="experience" className="py-20 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Опыт работы
