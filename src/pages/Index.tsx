@@ -220,6 +220,12 @@ const Index = () => {
                 Опыт
               </button>
               <button 
+                onClick={() => document.querySelector('section:has(.grid.sm\\:grid-cols-2.lg\\:grid-cols-3.xl\\:grid-cols-4)')?.scrollIntoView({ behavior: 'smooth' })}
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Услуги
+              </button>
+              <button 
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
               >
@@ -288,6 +294,15 @@ const Index = () => {
                   className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
                 >
                   Опыт
+                </button>
+                <button 
+                  onClick={() => {
+                    document.querySelector('section:has(.grid.sm\\:grid-cols-2.lg\\:grid-cols-3.xl\\:grid-cols-4)')?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Услуги
                 </button>
                 <button 
                   onClick={() => {
