@@ -386,42 +386,6 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-primary to-primary/80 text-white">
-        <div className="container mx-auto max-w-6xl px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in">
-            Что я могу делать
-          </h2>
-          <p className="text-center text-lg mb-12 text-white/90 animate-fade-in">
-            Практические навыки для решения бизнес-задач
-          </p>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {[
-              { icon: "Target", text: "Разработка маркетинговой стратегии и планов" },
-              { icon: "BarChart3", text: "Аналитика внутренних данных компании" },
-              { icon: "LineChart", text: "Анализ рынка. Маркетинговые исследования" },
-              { icon: "Search", text: "SEO продвижение сайта" },
-              { icon: "MousePointerClick", text: "Контекстная реклама" },
-              { icon: "Workflow", text: "Внедрение сквозной аналитики" },
-              { icon: "Globe", text: "Разработка лендингов, сайтов, чат-ботов, сервисов автообзвона" },
-              { icon: "ClipboardCheck", text: "Аудит маркетинга и бизнес процессов" },
-              { icon: "Database", text: "Внедрение CRM системы" },
-              { icon: "Sparkles", text: "Внедрение ИИ инструментов в маркетинг" }
-            ].map((skill, index) => (
-              <div 
-                key={index} 
-                className="flex items-start gap-3 p-4 bg-white/10 backdrop-blur-sm rounded-lg hover:bg-white/20 transition-all animate-fade-in"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className="w-10 h-10 bg-white/20 rounded-lg flex items-center justify-center flex-shrink-0 mt-1">
-                  <Icon name={skill.icon} className="text-white" size={20} />
-                </div>
-                <p className="text-white text-sm leading-relaxed">{skill.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="competencies" className="py-20 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
@@ -439,6 +403,42 @@ const Index = () => {
                 </div>
                 <h3 className="font-semibold text-lg mb-2">{comp.title}</h3>
                 <p className="text-sm text-muted-foreground">{comp.description}</p>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
+        <div className="container mx-auto max-w-6xl px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in text-foreground">
+            Что я могу делать
+          </h2>
+          <p className="text-center text-lg mb-12 text-muted-foreground animate-fade-in">
+            Практические навыки для решения бизнес-задач
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {[
+              { icon: "Target", text: "Разработка маркетинговой стратегии и планов", color: "from-blue-500 to-cyan-500" },
+              { icon: "BarChart3", text: "Аналитика внутренних данных компании", color: "from-purple-500 to-pink-500" },
+              { icon: "LineChart", text: "Анализ рынка. Маркетинговые исследования", color: "from-green-500 to-emerald-500" },
+              { icon: "Search", text: "SEO продвижение сайта", color: "from-orange-500 to-amber-500" },
+              { icon: "MousePointerClick", text: "Контекстная реклама", color: "from-red-500 to-rose-500" },
+              { icon: "Workflow", text: "Внедрение сквозной аналитики", color: "from-indigo-500 to-blue-500" },
+              { icon: "Globe", text: "Разработка лендингов, сайтов, чат-ботов, сервисов автообзвона", color: "from-teal-500 to-cyan-500" },
+              { icon: "ClipboardCheck", text: "Аудит маркетинга и бизнес процессов", color: "from-violet-500 to-purple-500" },
+              { icon: "Database", text: "Внедрение CRM системы", color: "from-pink-500 to-rose-500" },
+              { icon: "Sparkles", text: "Внедрение ИИ инструментов в маркетинг", color: "from-yellow-500 to-orange-500" }
+            ].map((skill, index) => (
+              <Card 
+                key={index} 
+                className="p-6 hover:shadow-xl transition-all hover:-translate-y-1 animate-fade-in bg-white border-0"
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <div className={`w-16 h-16 bg-gradient-to-br ${skill.color} rounded-2xl flex items-center justify-center mb-4 shadow-lg`}>
+                  <Icon name={skill.icon} className="text-white" size={28} />
+                </div>
+                <p className="text-foreground font-medium leading-relaxed">{skill.text}</p>
               </Card>
             ))}
           </div>
