@@ -378,7 +378,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="achievements" className="py-20 bg-muted/30">
+      <section id="achievements" className="py-12 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Ключевые достижения
@@ -401,7 +401,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="competencies" className="py-20 bg-white">
+      <section id="competencies" className="py-12 bg-white">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Ключевые компетенции
@@ -424,7 +424,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="experience" className="py-20 bg-muted/30">
+      <section id="experience" className="py-12 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
             Опыт работы
@@ -458,7 +458,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-white">
+      <section className="py-12 bg-white">
         <div className="container mx-auto max-w-7xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in text-foreground">
             Что я могу делать
@@ -503,7 +503,7 @@ const Index = () => {
         </div>
       </section>
 
-      <section id="contact" className="py-20 bg-white">
+      <section id="contact" className="py-12 bg-white">
         <div className="container mx-auto max-w-4xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in">
             Готов обсудить сотрудничество
