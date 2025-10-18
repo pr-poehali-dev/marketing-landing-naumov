@@ -137,8 +137,14 @@ const Index = () => {
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-border z-50">
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between h-16">
-            <div className="font-bold text-xl text-foreground">Юрий Наумов</div>
-            <nav className="hidden md:flex items-center gap-6">
+            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
+              <div className="font-bold text-lg md:text-xl text-foreground">Юрий Наумов</div>
+              <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
+                <Icon name="MapPin" size={14} />
+                <span>Новосибирск, Россия</span>
+              </div>
+            </div>
+            <nav className="hidden lg:flex items-center gap-6">
               <a href="tel:+79833021961" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 983 302 19 61
@@ -174,12 +180,27 @@ const Index = () => {
                 Контакты
               </button>
             </nav>
-            <Button 
-              size="sm"
-              onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-            >
-              Связаться
-            </Button>
+            <div className="flex items-center gap-2">
+              <a href="tel:+79833021961" className="lg:hidden">
+                <Button size="sm" variant="ghost">
+                  <Icon name="Phone" size={18} />
+                </Button>
+              </a>
+              <Button 
+                size="sm"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="hidden sm:flex"
+              >
+                Связаться
+              </Button>
+              <Button 
+                size="sm"
+                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
+                className="sm:hidden"
+              >
+                <Icon name="Mail" size={18} />
+              </Button>
+            </div>
           </div>
         </div>
       </header>
@@ -193,7 +214,7 @@ const Index = () => {
                   Наумов Юрий<br />Валентинович
                 </h1>
                 <p className="text-xl text-muted-foreground mb-2">
-                  Руководитель отдела маркетинга и рекламы
+                  Директор по маркетингу, аналитик
                 </p>
                 <p className="text-lg text-secondary">
                   20+ лет опыта • Digital • SEO • Аналитика
@@ -202,8 +223,8 @@ const Index = () => {
               
               <p className="text-lg leading-relaxed text-foreground/80">
                 Эксперт в комплексном маркетинге и аналитике с уникальной компетенцией в IT-интеграции 
-                и автоматизации бизнес-процессов. Сочетаю стратегическое мышление с hands-on опытом 
-                по росту брендов и запуску новых продуктов.
+                и автоматизации бизнес-процессов. Сочетаю стратегическое мышление с практическим опытом 
+                по лидогенерации и аналитике данных.
               </p>
 
               <div className="flex flex-wrap gap-4">
@@ -220,16 +241,7 @@ const Index = () => {
                 </Button>
               </div>
 
-              <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                <div className="flex items-center gap-2">
-                  <Icon name="MapPin" size={16} />
-                  <span>Новосибирск, Россия</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Icon name="Plane" size={16} />
-                  <span>Готов к переезду</span>
-                </div>
-              </div>
+
             </div>
 
             <div className="relative animate-fade-in" style={{ animationDelay: '0.2s' }}>
