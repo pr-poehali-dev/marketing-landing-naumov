@@ -95,19 +95,19 @@ const Index = () => {
 
   const competencies = [
     { icon: "TrendingUp", title: "Маркетинговая аналитика", description: "Big Data, BI, Data Analysis" },
-    { icon: "Target", title: "Стратегии", description: "Разработка и реализация" },
-    { icon: "Search", title: "SEO / Digital", description: "Системное продвижение" },
-    { icon: "Users", title: "Управление", description: "Найм и развитие команд" },
-    { icon: "Zap", title: "Автоматизация", description: "ИИ-инструменты, процессы" },
-    { icon: "Database", title: "CRM-системы", description: "Внедрение и развитие" },
+    { icon: "Target", title: "Стратегии", description: "Разработка и реализация маркетинговых стратегий и планов" },
+    { icon: "Workflow", title: "Управление маркетингом", description: "От планирования до реализации" },
     { icon: "UserPlus", title: "Лидогенерация", description: "Привлечение клиентов" },
-    { icon: "Globe", title: "Английский C2", description: "Свободно в работе" }
+    { icon: "Search", title: "SEO / Digital", description: "Системное продвижение компании, товаров и услуг в интернете" },
+    { icon: "Users", title: "Управление", description: "Найм и развитие команд" },
+    { icon: "Zap", title: "Автоматизация", description: "Внедрение CRM систем, ИИ-инструменты, процессы" },
+    { icon: "Database", title: "CRM-системы", description: "Внедрение и развитие" }
   ];
 
   const achievements = [
     { 
       icon: "TrendingUp", 
-      title: "Увеличил онлайн-трафик в 2,8 раза",
+      title: "Увеличил число лидов на 100+%",
       description: "Повысил лидогенерацию в крупной компании недвижимости"
     },
     { 
@@ -138,7 +138,11 @@ const Index = () => {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between h-16">
             <div className="font-bold text-xl text-foreground">Юрий Наумов</div>
-            <nav className="hidden md:flex items-center gap-8">
+            <nav className="hidden md:flex items-center gap-6">
+              <a href="tel:+79833021961" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
+                <Icon name="Phone" size={16} />
+                +7 983 302 19 61
+              </a>
               <button 
                 onClick={() => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' })}
                 className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
@@ -213,10 +217,6 @@ const Index = () => {
                 >
                   <Icon name="Mail" className="mr-2" size={20} />
                   Связаться
-                </Button>
-                <Button size="lg" variant="outline" className="text-lg px-8">
-                  <Icon name="Download" className="mr-2" size={20} />
-                  Скачать резюме PDF
                 </Button>
               </div>
 
@@ -406,6 +406,10 @@ const Index = () => {
                 <div className="flex items-center gap-2">
                   <Icon name="Mail" size={16} />
                   <span>yuriy.naumov@gmail.com</span>
+                </div>
+                <div className="flex items-center gap-2">
+                  <Icon name="Phone" size={16} />
+                  <a href="tel:+79833021961" className="hover:text-white transition-colors">+7 983 302 19 61</a>
                 </div>
                 <div className="flex items-center gap-2">
                   <Icon name="MapPin" size={16} />
