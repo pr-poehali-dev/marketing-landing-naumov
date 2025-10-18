@@ -13,6 +13,7 @@ const Index = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -144,7 +145,7 @@ const Index = () => {
           <div className="flex items-center justify-between h-16">
             <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
               <div className="font-bold text-lg md:text-xl text-foreground">Юрий Наумов</div>
-              <div className="flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
+              <div className="hidden sm:flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
                 <Icon name="MapPin" size={14} />
                 <span>Новосибирск, Россия</span>
               </div>
@@ -194,19 +195,79 @@ const Index = () => {
               <Button 
                 size="sm"
                 onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="hidden sm:flex"
+                className="hidden lg:flex"
               >
                 Связаться
               </Button>
               <Button 
                 size="sm"
-                onClick={() => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' })}
-                className="sm:hidden"
+                variant="ghost"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden"
               >
-                <Icon name="Mail" size={18} />
+                <Icon name={isMobileMenuOpen ? "X" : "Menu"} size={20} />
               </Button>
             </div>
           </div>
+
+          {isMobileMenuOpen && (
+            <div className="lg:hidden border-t border-border py-4 animate-fade-in">
+              <nav className="flex flex-col gap-4">
+                <button 
+                  onClick={() => {
+                    document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Главная
+                </button>
+                <button 
+                  onClick={() => {
+                    document.getElementById('achievements')?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Достижения
+                </button>
+                <button 
+                  onClick={() => {
+                    document.getElementById('competencies')?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Компетенции
+                </button>
+                <button 
+                  onClick={() => {
+                    document.getElementById('experience')?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Опыт
+                </button>
+                <button 
+                  onClick={() => {
+                    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Контакты
+                </button>
+                <a 
+                  href="tel:+79833021961" 
+                  className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors py-2"
+                >
+                  <Icon name="Phone" size={16} />
+                  +7 983 302 19 61
+                </a>
+              </nav>
+            </div>
+          )}
         </div>
       </header>
 
@@ -215,27 +276,27 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="space-y-8 animate-fade-in">
               <div>
-                <h1 className="text-5xl md:text-6xl font-bold text-foreground mb-4">
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-foreground mb-4">
                   Наумов Юрий<br />Валентинович
                 </h1>
-                <p className="text-xl text-muted-foreground mb-2">
+                <p className="text-lg sm:text-xl text-muted-foreground mb-2">
                   Директор по маркетингу, аналитик
                 </p>
-                <p className="text-lg text-secondary">
+                <p className="text-base sm:text-lg text-secondary">
                   20+ лет опыта • Digital • SEO • Аналитика
                 </p>
               </div>
               
-              <p className="text-lg leading-relaxed text-foreground/80">
+              <p className="text-base sm:text-lg leading-relaxed text-foreground/80">
                 Эксперт в комплексном маркетинге и аналитике с уникальной компетенцией в IT-интеграции 
                 и автоматизации бизнес-процессов. Сочетаю стратегическое мышление с практическим опытом 
                 по лидогенерации и аналитике данных.
               </p>
 
-              <div className="flex flex-wrap gap-4">
+              <div className="flex flex-wrap gap-3 sm:gap-4">
                 <Button 
                   size="lg" 
-                  className="text-lg px-8"
+                  className="text-base sm:text-lg px-6 sm:px-8 w-full sm:w-auto"
                   onClick={() => {
                     const contactSection = document.getElementById('contact');
                     contactSection?.scrollIntoView({ behavior: 'smooth' });
