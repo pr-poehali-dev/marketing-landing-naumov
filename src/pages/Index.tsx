@@ -409,42 +409,6 @@ const Index = () => {
         </div>
       </section>
 
-      <section className="py-20 bg-gradient-to-br from-slate-50 to-blue-50">
-        <div className="container mx-auto max-w-6xl px-4">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in text-foreground">
-            Что я могу делать
-          </h2>
-          <p className="text-center text-lg mb-12 text-muted-foreground animate-fade-in">
-            Практические навыки для решения бизнес-задач
-          </p>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {[
-              { icon: "Target", text: "Разработка маркетинговой стратегии и планов", color: "from-blue-500 to-cyan-500" },
-              { icon: "BarChart3", text: "Аналитика внутренних данных компании", color: "from-purple-500 to-pink-500" },
-              { icon: "LineChart", text: "Анализ рынка. Маркетинговые исследования", color: "from-green-500 to-emerald-500" },
-              { icon: "Search", text: "SEO продвижение сайта", color: "from-orange-500 to-amber-500" },
-              { icon: "MousePointerClick", text: "Контекстная реклама", color: "from-red-500 to-rose-500" },
-              { icon: "Workflow", text: "Внедрение сквозной аналитики", color: "from-indigo-500 to-blue-500" },
-              { icon: "Globe", text: "Разработка лендингов, сайтов, чат-ботов, сервисов автообзвона", color: "from-teal-500 to-cyan-500" },
-              { icon: "ClipboardCheck", text: "Аудит маркетинга и бизнес процессов", color: "from-violet-500 to-purple-500" },
-              { icon: "Database", text: "Внедрение CRM системы", color: "from-pink-500 to-rose-500" },
-              { icon: "Sparkles", text: "Внедрение ИИ инструментов в маркетинг", color: "from-yellow-500 to-orange-500" }
-            ].map((skill, index) => (
-              <Card 
-                key={index} 
-                className="p-6 hover:shadow-xl transition-all hover:-translate-y-1 animate-fade-in bg-white border-0"
-                style={{ animationDelay: `${index * 0.05}s` }}
-              >
-                <div className={`w-16 h-16 bg-gradient-to-br ${skill.color} rounded-2xl flex items-center justify-center mb-4 shadow-lg`}>
-                  <Icon name={skill.icon} className="text-white" size={28} />
-                </div>
-                <p className="text-foreground font-medium leading-relaxed">{skill.text}</p>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       <section id="experience" className="py-20 bg-muted/30">
         <div className="container mx-auto max-w-6xl px-4">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 animate-fade-in">
@@ -475,6 +439,51 @@ const Index = () => {
                 </div>
               ))}
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="py-20 bg-white">
+        <div className="container mx-auto max-w-7xl px-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-4 animate-fade-in text-foreground">
+            Что я могу делать
+          </h2>
+          <p className="text-center text-lg mb-12 text-muted-foreground animate-fade-in">
+            Практические навыки для решения бизнес-задач
+          </p>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            {[
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/542d105b-f059-47ef-a903-99e8564e7367.jpg", text: "Разработка маркетинговой стратегии и планов" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/52cb9702-ebfd-42c0-81b0-05ca3504ccf5.jpg", text: "Аналитика внутренних данных компании" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/06909d3c-b13a-4b1e-98ad-ea30a8a122fa.jpg", text: "Анализ рынка. Маркетинговые исследования" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/66ea5f58-8464-485c-a2dd-3144f0cdd778.jpg", text: "SEO продвижение сайта" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/7f42ad9d-b2f4-4fab-aaad-028d57569f61.jpg", text: "Контекстная реклама" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/dbb2baf6-8ec7-47b6-8843-898649938032.jpg", text: "Внедрение сквозной аналитики" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/378190cf-e8c2-461d-968c-d5a97b4238b3.jpg", text: "Разработка лендингов, сайтов, чат-ботов, сервисов автообзвона" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/b5efa212-045f-44f2-b8fd-76da50bda1f2.jpg", text: "Аудит маркетинга и бизнес процессов" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/3e0c8faf-f485-44ef-b161-7efa0d93b8f7.jpg", text: "Внедрение CRM системы" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/d2fef2f3-c966-4843-a7b7-ee535d5424de.jpg", text: "Внедрение ИИ инструментов в маркетинг" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/395caeec-79cf-4b25-be7e-ddcf173037e3.jpg", text: "Разработка дизайна с помощью ИИ сервисов" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/02c522c1-c9b5-49fc-b204-02ae97e1bbb4.jpg", text: "Разработка видео с помощью ИИ сервисов" }
+            ].map((skill, index) => (
+              <Card 
+                key={index} 
+                className="overflow-hidden hover:shadow-2xl transition-all hover:-translate-y-2 animate-fade-in bg-white border-0 group"
+                style={{ animationDelay: `${index * 0.05}s` }}
+              >
+                <div className="relative h-48 overflow-hidden">
+                  <img 
+                    src={skill.image} 
+                    alt={skill.text}
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
+                </div>
+                <div className="p-5">
+                  <p className="text-foreground font-semibold leading-relaxed text-center">{skill.text}</p>
+                </div>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
