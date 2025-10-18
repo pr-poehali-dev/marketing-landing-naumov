@@ -14,11 +14,50 @@ const Index = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [phoneError, setPhoneError] = useState('');
+
+  const validatePhone = (phone: string): boolean => {
+    const cleaned = phone.replace(/\D/g, '');
+    if (cleaned.length < 10 || cleaned.length > 11) {
+      setPhoneError('Введите корректный номер телефона (10-11 цифр)');
+      return false;
+    }
+    setPhoneError('');
+    return true;
+  };
+
+  const formatPhone = (value: string): string => {
+    const cleaned = value.replace(/\D/g, '');
+    const match = cleaned.match(/^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})$/);
+    if (!match) return value;
+    
+    const [, country, area, first, second, third] = match;
+    let formatted = '';
+    
+    if (country) formatted += '+' + country;
+    if (area) formatted += ' ' + area;
+    if (first) formatted += ' ' + first;
+    if (second) formatted += ' ' + second;
+    if (third) formatted += ' ' + third;
+    
+    return formatted.trim();
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhone(e.target.value);
+    setFormData({...formData, phone: formatted});
+    if (phoneError) validatePhone(formatted);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setSubmitStatus('idle');
+
+    if (!validatePhone(formData.phone)) {
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch('https://functions.poehali.dev/774b2c6c-2680-4f32-b4dd-739deea8c634', {
@@ -32,6 +71,7 @@ const Index = () => {
       if (response.ok) {
         setSubmitStatus('success');
         setFormData({ name: "", phone: "", message: "" });
+        setPhoneError('');
       } else {
         setSubmitStatus('error');
       }
@@ -429,9 +469,13 @@ const Index = () => {
                   type="tel"
                   placeholder="+7 900 123 45 67"
                   value={formData.phone}
-                  onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                  onChange={handlePhoneChange}
                   required
+                  className={phoneError ? 'border-red-500' : ''}
                 />
+                {phoneError && (
+                  <p className="text-sm text-red-600 mt-1">{phoneError}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium mb-2">Сообщение</label>
