@@ -27,7 +27,7 @@ const Index = () => {
   };
 
   const formatPhone = (value: string): string => {
-    const cleaned = value.replace(/\D/g, '');
+    const cleaned = value.replace(/\D/g, '').slice(0, 11);
     const match = cleaned.match(/^(\d{0,1})(\d{0,3})(\d{0,3})(\d{0,2})(\d{0,2})$/);
     if (!match) return value;
     
