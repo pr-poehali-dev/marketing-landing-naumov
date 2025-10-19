@@ -37,9 +37,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     
     try:
         if method == 'GET':
-            path_params = event.get('pathParams', {})
-            article_id = path_params.get('id')
             query_params = event.get('queryStringParameters', {})
+            article_id = query_params.get('id')
             slug = query_params.get('slug')
             
             cursor = conn.cursor()
@@ -227,8 +226,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'body': json.dumps({'error': 'Unauthorized'})
                 }
             
-            path_params = event.get('pathParams', {})
-            article_id = path_params.get('id')
+            query_params = event.get('queryStringParameters', {})
+            article_id = query_params.get('id')
             
             if not article_id:
                 conn.close()
@@ -310,8 +309,8 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'body': json.dumps({'error': 'Unauthorized'})
                 }
             
-            path_params = event.get('pathParams', {})
-            article_id = path_params.get('id')
+            query_params = event.get('queryStringParameters', {})
+            article_id = query_params.get('id')
             
             if not article_id:
                 conn.close()

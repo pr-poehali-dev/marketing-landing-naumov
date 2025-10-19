@@ -154,7 +154,7 @@ const ArticlesList = () => {
     const token = localStorage.getItem('adminToken');
     
     try {
-      await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85/${id}`, {
+      await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?id=${id}`, {
         method: 'DELETE',
         headers: {
           'X-Auth-Token': token || ''

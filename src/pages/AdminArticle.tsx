@@ -37,11 +37,11 @@ const AdminArticle = () => {
     if (!isNew && id) {
       loadArticle();
     }
-  }, [id, isNew, navigate]);
+  }, [id, isNew]);
 
   const loadArticle = async () => {
     try {
-      const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85/${id}`);
+      const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?id=${id}`);
       const article = await response.json();
       
       if (article && !article.error) {
@@ -92,7 +92,7 @@ const AdminArticle = () => {
     try {
       const url = isNew 
         ? 'https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85'
-        : `https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85/${id}`;
+        : `https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?id=${id}`;
       
       const method = isNew ? 'POST' : 'PUT';
 
@@ -192,6 +192,28 @@ const AdminArticle = () => {
               <span className="font-semibold">Назад к списку</span>
             </button>
             <div className="flex items-center gap-2">
+              {!isNew && (
+                <Button
+                  variant="destructive"
+                  onClick={async () => {
+                    if (!confirm('Удалить эту статью?')) return;
+                    const token = localStorage.getItem('adminToken');
+                    try {
+                      await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?id=${id}`, {
+                        method: 'DELETE',
+                        headers: { 'X-Auth-Token': token || '' }
+                      });
+                      navigate('/admin');
+                    } catch (error) {
+                      alert('Ошибка при удалении статьи');
+                    }
+                  }}
+                  disabled={saving}
+                >
+                  <Icon name="Trash2" size={16} className="mr-2" />
+                  Удалить
+                </Button>
+              )}
               <Button
                 variant="outline"
                 onClick={() => {

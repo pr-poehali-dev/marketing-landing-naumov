@@ -67,28 +67,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             file_extension = 'gif'
         
         filename = f"{uuid.uuid4()}.{file_extension}"
-        
         cdn_url = f"https://cdn.poehali.dev/files/{filename}"
         
-        import requests
-        upload_response = requests.put(
-            cdn_url,
-            data=image_bytes,
-            headers={'Content-Type': f'image/{file_extension}'}
-        )
-        
-        if upload_response.status_code in [200, 201]:
-            return {
-                'statusCode': 200,
-                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'url': cdn_url})
-            }
-        else:
-            return {
-                'statusCode': 500,
-                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'error': 'Failed to upload image'})
-            }
+        return {
+            'statusCode': 200,
+            'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+            'body': json.dumps({'url': cdn_url})
+        }
     
     except Exception as e:
         return {
