@@ -231,6 +231,12 @@ const Index = () => {
               >
                 Контакты
               </button>
+              <a 
+                href="/blog"
+                className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
+              >
+                Блог
+              </a>
             </nav>
             <div className="flex items-center gap-2">
               <a href="tel:+79833021961" className="lg:hidden">
@@ -313,6 +319,12 @@ const Index = () => {
                 >
                   Контакты
                 </button>
+                <a 
+                  href="/blog"
+                  className="text-left text-sm font-medium text-muted-foreground hover:text-foreground transition-colors py-2"
+                >
+                  Блог
+                </a>
                 <a 
                   href="tel:+79833021961" 
                   className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors py-2"
@@ -472,7 +484,7 @@ const Index = () => {
               { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/52cb9702-ebfd-42c0-81b0-05ca3504ccf5.jpg", text: "Аналитика внутренних данных компании" },
               { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/06909d3c-b13a-4b1e-98ad-ea30a8a122fa.jpg", text: "Анализ рынка. Маркетинговые исследования" },
               { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/66ea5f58-8464-485c-a2dd-3144f0cdd778.jpg", text: "SEO продвижение сайта" },
-              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/7f42ad9d-b2f4-4fab-aaad-028d57569f61.jpg", text: "Контекстная реклама" },
+              { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/7f42ad9d-b2f4-4fab-aaad-028d57569f61.jpg", text: "Контекстная и таргетированная реклама. Лидогенерация" },
               { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/dbb2baf6-8ec7-47b6-8843-898649938032.jpg", text: "Внедрение сквозной аналитики" },
               { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/378190cf-e8c2-461d-968c-d5a97b4238b3.jpg", text: "Разработка лендингов, сайтов, чат-ботов, сервисов автообзвона" },
               { image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/b5efa212-045f-44f2-b8fd-76da50bda1f2.jpg", text: "Аудит маркетинга и бизнес процессов" },
