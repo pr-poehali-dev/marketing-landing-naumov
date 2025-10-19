@@ -18,7 +18,12 @@ const BlogArticle = () => {
       const pageTitle = article.seo_title || article.title || 'Статья';
       const pageDescription = article.seo_description || article.excerpt || '';
       
-      document.title = pageTitle;
+      let titleTag = document.querySelector('title');
+      if (!titleTag) {
+        titleTag = document.createElement('title');
+        document.head.appendChild(titleTag);
+      }
+      titleTag.textContent = pageTitle;
       
       let metaDescription = document.querySelector('meta[name="description"]');
       if (!metaDescription) {

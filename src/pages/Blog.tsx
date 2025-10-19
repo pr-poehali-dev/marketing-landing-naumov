@@ -12,7 +12,12 @@ const Blog = () => {
   useEffect(() => {
     loadArticles();
     
-    document.title = 'Блог | Юрий Наумов';
+    let titleTag = document.querySelector('title');
+    if (!titleTag) {
+      titleTag = document.createElement('title');
+      document.head.appendChild(titleTag);
+    }
+    titleTag.textContent = 'Блог | Юрий Наумов';
     
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {

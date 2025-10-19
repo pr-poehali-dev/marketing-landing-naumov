@@ -17,7 +17,12 @@ const Index = () => {
   const [phoneError, setPhoneError] = useState('');
 
   useEffect(() => {
-    document.title = 'Юрий Наумов — маркетолог и бизнес-консультант';
+    let titleTag = document.querySelector('title');
+    if (!titleTag) {
+      titleTag = document.createElement('title');
+      document.head.appendChild(titleTag);
+    }
+    titleTag.textContent = 'Юрий Наумов — маркетолог и бизнес-консультант';
     
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {

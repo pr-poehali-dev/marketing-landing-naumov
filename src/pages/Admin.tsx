@@ -18,7 +18,12 @@ const Admin = () => {
       setIsAuthenticated(true);
     }
     
-    document.title = 'Админка | Блог';
+    let titleTag = document.querySelector('title');
+    if (!titleTag) {
+      titleTag = document.createElement('title');
+      document.head.appendChild(titleTag);
+    }
+    titleTag.textContent = 'Админка | Блог';
     
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {

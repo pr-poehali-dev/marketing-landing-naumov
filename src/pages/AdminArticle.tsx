@@ -34,7 +34,12 @@ const AdminArticle = () => {
       return;
     }
     
-    document.title = isNew ? 'Новая статья | Админка' : 'Редактирование статьи | Админка';
+    let titleTag = document.querySelector('title');
+    if (!titleTag) {
+      titleTag = document.createElement('title');
+      document.head.appendChild(titleTag);
+    }
+    titleTag.textContent = isNew ? 'Новая статья | Админка' : 'Редактирование статьи | Админка';
     
     let metaDescription = document.querySelector('meta[name="description"]');
     if (!metaDescription) {
