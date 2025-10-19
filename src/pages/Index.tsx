@@ -181,16 +181,16 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-white">
       <header className="fixed top-0 left-0 right-0 bg-white/95 backdrop-blur-sm border-b border-border z-50">
-        <div className="container mx-auto max-w-6xl px-4">
+        <div className="container mx-auto max-w-7xl px-4">
           <div className="flex items-center justify-between h-16">
-            <div className="flex flex-col md:flex-row md:items-center gap-1 md:gap-3">
-              <div className="font-bold text-lg md:text-xl text-foreground">Юрий Наумов</div>
-              <div className="hidden sm:flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
+            <div className="flex items-center gap-3 shrink-0">
+              <div className="font-bold text-lg md:text-xl text-foreground whitespace-nowrap">Юрий Наумов</div>
+              <div className="hidden xl:flex items-center gap-2 text-xs md:text-sm text-muted-foreground">
                 <Icon name="MapPin" size={14} />
-                <span>Новосибирск, Россия</span>
+                <span className="whitespace-nowrap">Новосибирск, Россия</span>
               </div>
             </div>
-            <nav className="hidden lg:flex items-center gap-6">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-6 flex-wrap justify-end">
               <a href="tel:+79833021961" className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">
                 <Icon name="Phone" size={16} />
                 +7 983 302 19 61
