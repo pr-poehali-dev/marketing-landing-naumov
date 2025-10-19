@@ -13,6 +13,20 @@ const BlogArticle = () => {
     loadArticle();
   }, [slug]);
 
+  useEffect(() => {
+    if (article) {
+      document.title = article.seo_title || article.title || 'Статья';
+      
+      let metaDescription = document.querySelector('meta[name="description"]');
+      if (!metaDescription) {
+        metaDescription = document.createElement('meta');
+        metaDescription.setAttribute('name', 'description');
+        document.head.appendChild(metaDescription);
+      }
+      metaDescription.setAttribute('content', article.seo_description || article.excerpt || '');
+    }
+  }, [article]);
+
   const loadArticle = async () => {
     try {
       const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?slug=${slug}`);

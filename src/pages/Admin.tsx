@@ -216,6 +216,16 @@ const ArticlesList = () => {
               </div>
             </div>
             <div className="flex gap-2">
+              {article.published && (
+                <Button 
+                  variant="ghost" 
+                  size="sm"
+                  onClick={() => navigate(`/blog/${article.slug}`)}
+                >
+                  <Icon name="Eye" size={16} className="mr-2" />
+                  Посмотреть
+                </Button>
+              )}
               <Button 
                 variant="outline" 
                 size="sm"
