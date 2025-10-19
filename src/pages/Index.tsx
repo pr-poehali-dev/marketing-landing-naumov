@@ -576,6 +576,12 @@ const Index = () => {
                   required
                 />
               </div>
+              <p className="text-xs text-muted-foreground">
+                Нажимая кнопку, вы соглашаетесь с{' '}
+                <a href="/privacy" className="underline hover:text-primary">политикой конфиденциальности</a>
+                {' '}и даете{' '}
+                <a href="/consent" className="underline hover:text-primary">согласие на обработку персональных данных</a>
+              </p>
               <div className="flex flex-col sm:flex-row gap-4">
                 <Button type="submit" size="lg" className="flex-1" disabled={isSubmitting}>
                   <Icon name="Send" className="mr-2" size={18} />

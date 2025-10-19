@@ -40,10 +40,43 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             query_params = event.get('queryStringParameters', {})
             article_id = query_params.get('id')
             slug = query_params.get('slug')
+            page_type = query_params.get('type')
             
             cursor = conn.cursor()
             
-            if article_id:
+            if page_type:
+                cursor.execute(
+                    "SELECT id, type, title, content, updated_at FROM pages WHERE type = %s",
+                    (page_type,)
+                )
+                row = cursor.fetchone()
+                
+                if not row:
+                    cursor.close()
+                    conn.close()
+                    return {
+                        'statusCode': 404,
+                        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                        'body': json.dumps({'error': 'Page not found'})
+                    }
+                
+                page = {
+                    'id': row[0],
+                    'type': row[1],
+                    'title': row[2],
+                    'content': row[3],
+                    'updated_at': row[4].isoformat() if row[4] else None
+                }
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps(page)
+                }
+            elif article_id:
                 cursor.execute(
                     "SELECT id, slug, title, excerpt, content, image_url, seo_title, seo_description, published, created_at, updated_at FROM articles WHERE id = %s",
                     (article_id,)
@@ -228,6 +261,51 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
             
             query_params = event.get('queryStringParameters', {})
             article_id = query_params.get('id')
+            page_type = query_params.get('type')
+            
+            body_data = json.loads(event.get('body', '{}'))
+            
+            if page_type:
+                cursor = conn.cursor()
+                cursor.execute(
+                    """
+                    UPDATE pages 
+                    SET title = %s, content = %s, updated_at = CURRENT_TIMESTAMP
+                    WHERE type = %s
+                    RETURNING id, type, title, content, updated_at
+                    """,
+                    (body_data['title'], body_data['content'], page_type)
+                )
+                
+                row = cursor.fetchone()
+                
+                if not row:
+                    cursor.close()
+                    conn.close()
+                    return {
+                        'statusCode': 404,
+                        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                        'body': json.dumps({'error': 'Page not found'})
+                    }
+                
+                conn.commit()
+                
+                page = {
+                    'id': row[0],
+                    'type': row[1],
+                    'title': row[2],
+                    'content': row[3],
+                    'updated_at': row[4].isoformat() if row[4] else None
+                }
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps(page)
+                }
             
             if not article_id:
                 conn.close()
@@ -236,8 +314,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
                     'body': json.dumps({'error': 'Article ID required'})
                 }
-            
-            body_data = json.loads(event.get('body', '{}'))
             
             cursor = conn.cursor()
             cursor.execute(

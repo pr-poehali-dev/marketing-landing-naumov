@@ -129,10 +129,16 @@ const Admin = () => {
         <div className="container mx-auto max-w-6xl px-4">
           <div className="flex items-center justify-between mb-8">
             <h1 className="text-4xl font-bold">Управление блогом</h1>
-            <Button onClick={() => navigate('/admin/article/new')}>
-              <Icon name="Plus" size={18} className="mr-2" />
-              Новая статья
-            </Button>
+            <div className="flex gap-3">
+              <Button variant="outline" onClick={() => navigate('/admin/pages')}>
+                <Icon name="FileText" size={18} className="mr-2" />
+                Страницы
+              </Button>
+              <Button onClick={() => navigate('/admin/article/new')}>
+                <Icon name="Plus" size={18} className="mr-2" />
+                Новая статья
+              </Button>
+            </div>
           </div>
 
           <ArticlesList />
