@@ -15,6 +15,7 @@ const AdminArticle = () => {
 
   const [loading, setLoading] = useState(!isNew);
   const [saving, setSaving] = useState(false);
+  const [uploading, setUploading] = useState(false);
   const [formData, setFormData] = useState({
     title: '',
     slug: '',
@@ -40,17 +41,11 @@ const AdminArticle = () => {
 
   const loadArticle = async () => {
     try {
-      const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?drafts=true`);
-      const articles = await response.json();
-      const article = articles.find((a: any) => a.id === parseInt(id || '0'));
+      const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85/${id}`);
+      const article = await response.json();
       
-      if (article) {
-        const detailResponse = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?slug=${article.slug}`);
-        const detailData = await detailResponse.json();
-        
-        if (Array.isArray(detailData) && detailData.length > 0) {
-          setFormData(detailData[0]);
-        }
+      if (article && !article.error) {
+        setFormData(article);
       }
     } catch (error) {
       console.error('Error loading article:', error);
@@ -131,6 +126,48 @@ const AdminArticle = () => {
       </div>
     );
   }
+
+  const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (!file) return;
+
+    if (!file.type.startsWith('image/')) {
+      alert('Пожалуйста, выберите изображение');
+      return;
+    }
+
+    setUploading(true);
+    const token = localStorage.getItem('adminToken');
+
+    try {
+      const reader = new FileReader();
+      reader.onloadend = async () => {
+        const base64 = reader.result as string;
+        
+        const response = await fetch('https://functions.poehali.dev/115acf40-3abe-490e-ae08-dababd268c54', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'X-Auth-Token': token || ''
+          },
+          body: JSON.stringify({ image: base64 })
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setFormData(prev => ({ ...prev, image_url: data.url }));
+        } else {
+          alert('Ошибка загрузки изображения');
+        }
+        setUploading(false);
+      };
+      reader.readAsDataURL(file);
+    } catch (error) {
+      console.error('Error uploading image:', error);
+      alert('Ошибка загрузки изображения');
+      setUploading(false);
+    }
+  };
 
   const modules = {
     toolbar: [
@@ -226,21 +263,37 @@ const AdminArticle = () => {
                 </div>
 
                 <div>
-                  <label className="text-sm font-medium mb-2 block">URL изображения</label>
-                  <Input
-                    value={formData.image_url}
-                    onChange={(e) => setFormData(prev => ({ ...prev, image_url: e.target.value }))}
-                    placeholder="https://cdn.poehali.dev/..."
-                  />
-                  {formData.image_url && (
-                    <div className="mt-3">
-                      <img 
-                        src={formData.image_url} 
-                        alt="Preview"
-                        className="w-full max-w-md h-48 object-cover rounded-lg"
+                  <label className="text-sm font-medium mb-2 block">Изображение</label>
+                  <div className="space-y-3">
+                    <div className="flex gap-2">
+                      <Input
+                        type="file"
+                        accept="image/*"
+                        onChange={handleImageUpload}
+                        disabled={uploading}
+                        className="flex-1"
                       />
+                      {uploading && (
+                        <span className="text-sm text-muted-foreground flex items-center">
+                          Загрузка...
+                        </span>
+                      )}
                     </div>
-                  )}
+                    <Input
+                      value={formData.image_url}
+                      onChange={(e) => setFormData(prev => ({ ...prev, image_url: e.target.value }))}
+                      placeholder="или вставьте URL: https://cdn.poehali.dev/..."
+                    />
+                    {formData.image_url && (
+                      <div className="mt-3">
+                        <img 
+                          src={formData.image_url} 
+                          alt="Preview"
+                          className="w-full max-w-md h-48 object-cover rounded-lg"
+                        />
+                      </div>
+                    )}
+                  </div>
                 </div>
               </div>
             </Card>

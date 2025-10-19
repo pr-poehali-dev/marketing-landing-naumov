@@ -38,11 +38,51 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
     try:
         if method == 'GET':
             path_params = event.get('pathParams', {})
-            slug = path_params.get('slug')
+            article_id = path_params.get('id')
+            query_params = event.get('queryStringParameters', {})
+            slug = query_params.get('slug')
             
             cursor = conn.cursor()
             
-            if slug:
+            if article_id:
+                cursor.execute(
+                    "SELECT id, slug, title, excerpt, content, image_url, seo_title, seo_description, published, created_at, updated_at FROM articles WHERE id = %s",
+                    (article_id,)
+                )
+                row = cursor.fetchone()
+                
+                if not row:
+                    cursor.close()
+                    conn.close()
+                    return {
+                        'statusCode': 404,
+                        'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                        'body': json.dumps({'error': 'Article not found'})
+                    }
+                
+                article = {
+                    'id': row[0],
+                    'slug': row[1],
+                    'title': row[2],
+                    'excerpt': row[3],
+                    'content': row[4],
+                    'image_url': row[5],
+                    'seo_title': row[6],
+                    'seo_description': row[7],
+                    'published': row[8],
+                    'created_at': row[9].isoformat() if row[9] else None,
+                    'updated_at': row[10].isoformat() if row[10] else None
+                }
+                
+                cursor.close()
+                conn.close()
+                
+                return {
+                    'statusCode': 200,
+                    'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
+                    'body': json.dumps(article)
+                }
+            elif slug:
                 cursor.execute(
                     "SELECT id, slug, title, excerpt, content, image_url, seo_title, seo_description, published, created_at, updated_at FROM articles WHERE slug = %s",
                     (slug,)
@@ -81,7 +121,6 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
                     'body': json.dumps(article)
                 }
             else:
-                query_params = event.get('queryStringParameters', {})
                 include_drafts = query_params.get('drafts') == 'true'
                 
                 if include_drafts:

@@ -1,0 +1,14 @@
+{
+  "tests": [
+    {
+      "name": "Upload image test",
+      "method": "POST",
+      "path": "/",
+      "expectedStatus": 401,
+      "expectedBody": {
+        "error": "string"
+      },
+      "bodyMatcher": "partial"
+    }
+  ]
+}
