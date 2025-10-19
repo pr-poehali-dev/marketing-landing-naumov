@@ -3,7 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import Icon from "@/components/ui/icon";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -15,6 +15,18 @@ const Index = () => {
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [phoneError, setPhoneError] = useState('');
+
+  useEffect(() => {
+    document.title = 'Юрий Наумов — маркетолог и бизнес-консультант';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Помогаю компаниям выстраивать эффективные маркетинговые процессы и внедрять системы аналитики. Опыт 20+ лет.');
+  }, []);
 
   const validatePhone = (phone: string): boolean => {
     const cleaned = phone.replace(/\D/g, '');

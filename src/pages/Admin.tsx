@@ -17,6 +17,16 @@ const Admin = () => {
     if (token === 'yuriyadmin2025') {
       setIsAuthenticated(true);
     }
+    
+    document.title = 'Админка | Блог';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Панель управления блогом');
   }, []);
 
   const handleLogin = (e: React.FormEvent) => {

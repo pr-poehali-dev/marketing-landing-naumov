@@ -11,6 +11,16 @@ const Blog = () => {
 
   useEffect(() => {
     loadArticles();
+    
+    document.title = 'Блог | Юрий Наумов';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Статьи о маркетинге, аналитике и автоматизации бизнес-процессов');
   }, []);
 
   const loadArticles = async () => {

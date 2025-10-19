@@ -15,7 +15,10 @@ const BlogArticle = () => {
 
   useEffect(() => {
     if (article) {
-      document.title = article.seo_title || article.title || 'Статья';
+      const pageTitle = article.seo_title || article.title || 'Статья';
+      const pageDescription = article.seo_description || article.excerpt || '';
+      
+      document.title = pageTitle;
       
       let metaDescription = document.querySelector('meta[name="description"]');
       if (!metaDescription) {
@@ -23,7 +26,23 @@ const BlogArticle = () => {
         metaDescription.setAttribute('name', 'description');
         document.head.appendChild(metaDescription);
       }
-      metaDescription.setAttribute('content', article.seo_description || article.excerpt || '');
+      metaDescription.setAttribute('content', pageDescription);
+      
+      let ogTitle = document.querySelector('meta[property="og:title"]');
+      if (!ogTitle) {
+        ogTitle = document.createElement('meta');
+        ogTitle.setAttribute('property', 'og:title');
+        document.head.appendChild(ogTitle);
+      }
+      ogTitle.setAttribute('content', pageTitle);
+      
+      let ogDescription = document.querySelector('meta[property="og:description"]');
+      if (!ogDescription) {
+        ogDescription = document.createElement('meta');
+        ogDescription.setAttribute('property', 'og:description');
+        document.head.appendChild(ogDescription);
+      }
+      ogDescription.setAttribute('content', pageDescription);
     }
   }, [article]);
 

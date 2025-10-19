@@ -33,6 +33,16 @@ const AdminArticle = () => {
       navigate('/admin');
       return;
     }
+    
+    document.title = isNew ? 'Новая статья | Админка' : 'Редактирование статьи | Админка';
+    
+    let metaDescription = document.querySelector('meta[name="description"]');
+    if (!metaDescription) {
+      metaDescription = document.createElement('meta');
+      metaDescription.setAttribute('name', 'description');
+      document.head.appendChild(metaDescription);
+    }
+    metaDescription.setAttribute('content', 'Панель управления блогом');
 
     if (!isNew && id) {
       loadArticle();
