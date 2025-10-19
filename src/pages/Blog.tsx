@@ -59,7 +59,7 @@ const Blog = () => {
                 key={article.id}
                 className="overflow-hidden hover:shadow-lg transition-all animate-fade-in cursor-pointer"
                 style={{ animationDelay: `${index * 0.1}s` }}
-                onClick={() => navigate(`/blog/${article.id}`)}
+                onClick={() => navigate(`/blog/${article.slug}`)}
               >
                 <div className="grid md:grid-cols-3 gap-4">
                   <div className="md:col-span-1 h-48 md:h-auto overflow-hidden">

@@ -80,7 +80,7 @@ const AdminArticle = () => {
     }));
   };
 
-  const handleSave = async () => {
+  const handleSave = async (publishStatus?: boolean) => {
     if (!formData.title || !formData.slug || !formData.content) {
       alert('Заполните обязательные поля: заголовок, slug и содержание');
       return;
@@ -88,6 +88,10 @@ const AdminArticle = () => {
 
     setSaving(true);
     const token = localStorage.getItem('adminToken');
+
+    const dataToSave = publishStatus !== undefined 
+      ? { ...formData, published: publishStatus }
+      : formData;
 
     try {
       const url = isNew 
@@ -102,7 +106,7 @@ const AdminArticle = () => {
           'Content-Type': 'application/json',
           'X-Auth-Token': token || ''
         },
-        body: JSON.stringify(formData)
+        body: JSON.stringify(dataToSave)
       });
 
       if (response.ok) {
@@ -216,19 +220,13 @@ const AdminArticle = () => {
               )}
               <Button
                 variant="outline"
-                onClick={() => {
-                  setFormData(prev => ({ ...prev, published: false }));
-                  setTimeout(handleSave, 100);
-                }}
+                onClick={() => handleSave(false)}
                 disabled={saving}
               >
                 Сохранить черновик
               </Button>
               <Button
-                onClick={() => {
-                  setFormData(prev => ({ ...prev, published: true }));
-                  setTimeout(handleSave, 100);
-                }}
+                onClick={() => handleSave(true)}
                 disabled={saving}
               >
                 {saving ? 'Сохранение...' : 'Опубликовать'}
