@@ -2,7 +2,6 @@ import json
 import os
 import base64
 import uuid
-import requests
 from typing import Dict, Any
 
 def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
@@ -67,27 +66,13 @@ def handler(event: Dict[str, Any], context: Any) -> Dict[str, Any]:
         elif image_base64.startswith('R0lGOD'):
             file_extension = 'gif'
         
-        filename = f"{uuid.uuid4()}.{file_extension}"
-        
-        upload_url = "https://api.poehali.dev/upload"
-        files = {'file': (filename, image_bytes, f'image/{file_extension}')}
-        
-        upload_response = requests.post(upload_url, files=files)
-        
-        if upload_response.status_code != 200:
-            return {
-                'statusCode': 500,
-                'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-                'body': json.dumps({'error': 'Failed to upload image to CDN'})
-            }
-        
-        upload_data = upload_response.json()
-        cdn_url = upload_data.get('url', f"https://cdn.poehali.dev/files/{filename}")
+        mime_type = f'image/{file_extension}'
+        data_url = f'data:{mime_type};base64,{image_base64}'
         
         return {
             'statusCode': 200,
             'headers': {'Content-Type': 'application/json', 'Access-Control-Allow-Origin': '*'},
-            'body': json.dumps({'url': cdn_url})
+            'body': json.dumps({'url': data_url})
         }
     
     except Exception as e:

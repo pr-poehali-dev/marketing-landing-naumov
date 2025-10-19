@@ -18,8 +18,8 @@ const BlogArticle = () => {
       const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?slug=${slug}`);
       const data = await response.json();
       
-      if (Array.isArray(data) && data.length > 0) {
-        setArticle(data[0]);
+      if (data && !data.error) {
+        setArticle(data);
       }
     } catch (error) {
       console.error('Error loading article:', error);
