@@ -111,3 +111,37 @@
     font-family: "Montserrat", sans-serif;
   }
 }
+
+.quill-editor .ql-container {
+  min-height: 400px;
+  font-size: 16px;
+}
+
+.quill-editor .ql-editor {
+  min-height: 400px;
+}
+
+.quill-editor .ql-editor h2 {
+  font-size: 1.875rem;
+  font-weight: 700;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.quill-editor .ql-editor h3 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.quill-editor .ql-editor p {
+  margin-bottom: 1rem;
+  line-height: 1.75;
+}
+
+.quill-editor .ql-editor ul,
+.quill-editor .ql-editor ol {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+}

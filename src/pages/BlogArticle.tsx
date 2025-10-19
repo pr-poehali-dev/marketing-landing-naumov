@@ -1,15 +1,53 @@
 import { Button } from "@/components/ui/button";
 import Icon from "@/components/ui/icon";
 import { useNavigate, useParams } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 const BlogArticle = () => {
   const navigate = useNavigate();
   const { id } = useParams();
+  const [article, setArticle] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
 
-  const article = {
-    title: "Автоматизация маркетинга: с чего начать",
-    date: "15 октября 2025",
-    image: "https://cdn.poehali.dev/projects/1c1ab3b1-a350-4bc1-9741-82fbd13055e1/files/dbb2baf6-8ec7-47b6-8843-898649938032.jpg",
+  useEffect(() => {
+    loadArticle();
+  }, [id]);
+
+  const loadArticle = async () => {
+    try {
+      const response = await fetch(`https://functions.poehali.dev/360dca96-3120-4a36-8352-b6c30ba9ad85?slug=${id}`);
+      const data = await response.json();
+      
+      if (Array.isArray(data) && data.length > 0) {
+        setArticle(data[0]);
+      }
+    } catch (error) {
+      console.error('Error loading article:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">Загрузка...</div>
+      </div>
+    );
+  }
+
+  if (!article) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold mb-4">Статья не найдена</h2>
+          <Button onClick={() => navigate('/blog')}>Вернуться к блогу</Button>
+        </div>
+      </div>
+    );
+  }
+
+  const oldArticle = {
     content: `
       <p>Автоматизация маркетинга — это не просто модный тренд, а необходимость для современного бизнеса. В этой статье я поделюсь практическим опытом внедрения систем автоматизации в компаниях разного масштаба.</p>
 
@@ -80,15 +118,17 @@ const BlogArticle = () => {
       <main className="pt-24 pb-16">
         <article className="container mx-auto max-w-3xl px-4">
           <div className="mb-8">
-            <div className="text-sm text-muted-foreground mb-3">{article.date}</div>
+            <div className="text-sm text-muted-foreground mb-3">{new Date(article.created_at).toLocaleDateString('ru-RU', { year: 'numeric', month: 'long', day: 'numeric' })}</div>
             <h1 className="text-4xl md:text-5xl font-bold mb-6 animate-fade-in">{article.title}</h1>
-            <div className="rounded-2xl overflow-hidden mb-8">
-              <img 
-                src={article.image} 
-                alt={article.title}
-                className="w-full h-auto"
-              />
-            </div>
+            {article.image_url && (
+              <div className="rounded-2xl overflow-hidden mb-8">
+                <img 
+                  src={article.image_url} 
+                  alt={article.title}
+                  className="w-full h-auto"
+                />
+              </div>
+            )}
           </div>
 
           <div 
